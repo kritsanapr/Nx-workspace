@@ -1,0 +1,90 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/dtp-cm/src",
+  "prefix": "dtp-cm",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/dtp-cm",
+        "index": "apps/dtp-cm/src/index.html",
+        "main": "apps/dtp-cm/src/main.ts",
+        "polyfills": "apps/dtp-cm/src/polyfills.ts",
+        "tsConfig": "apps/dtp-cm/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/dtp-cm/src/favicon.ico", "apps/dtp-cm/src/assets"],
+        "styles": ["apps/dtp-cm/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/dtp-cm/src/environments/environment.ts",
+              "with": "apps/dtp-cm/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "dtp-cm:build:production"
+        },
+        "development": {
+          "browserTarget": "dtp-cm:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/dtp-cm/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "dtp-cm:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/dtp-cm/**/*.ts", "apps/dtp-cm/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/dtp-cm"],
+      "options": {
+        "jestConfig": "apps/dtp-cm/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
