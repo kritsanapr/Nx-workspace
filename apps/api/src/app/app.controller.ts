@@ -12,4 +12,9 @@ export class AppController {
   getData(): Message {
     return this.appService.getData();
   }
+
+  @Get('hi')
+  getHi() {
+    return { msg: 'test docker devcontainer' };
+  }
 }
